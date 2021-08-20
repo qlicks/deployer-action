@@ -3,7 +3,6 @@
 namespace Deployer;
 
 require 'recipe/common.php';
-require '$_ENV["overwrite"]';
 use Deployer\Exception\Exception;
 use Deployer\Exception\RuntimeException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
