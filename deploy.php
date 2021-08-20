@@ -301,3 +301,4 @@ set('shared_dirs', [
     '{{magento_dir}}/var/session'
 ]);
 
+inventory('hosts.yml');
