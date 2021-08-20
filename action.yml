@@ -24,6 +24,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    - PHP_VERSION: ${{ inputs.task }}
   args: 
     - ${{ inputs.task }}
     - ${{ inputs.target }}
