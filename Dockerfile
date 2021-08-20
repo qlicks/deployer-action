@@ -1,4 +1,5 @@
-FROM ghcr.io/qlicks/magento-php-$php-version:latest
+ARG php-version
+FROM ghcr.io/qlicks/magento-php-${php-version}:latest
 
 COPY entrypoint.sh /entrypoint.sh
 
