@@ -1,0 +1,30 @@
+name: 'Deployer action Magento 2'
+description: 'Deployer configuration for deploy Magento 2 with zero down-time'
+author: 'Misha Serbenyuk'
+branding:
+  color: yellow
+  icon: package
+inputs:
+  php-version:
+    description: 'Version of php for build project'
+    required: true
+    default: 7.3
+#  overwrite:
+#    description: 'File that will be required to default deploy.php, must contain hosts configuration, my default require deploy.php in root dir'
+#    required: true
+#    default: deploy.php
+  task: 
+    description: 'Task to run, example build, deploy, docker'
+    required: true
+  target:
+    description: 'Where run deploy, used only if deploy to server'
+  extra-arguments:
+    description: 'Extra arguments for deployer, like verbose mode'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args: 
+    - ${{ inputs.task }}
+    - ${{ inputs.target }}
+    - ${{ inputs.extra-arguments }}
