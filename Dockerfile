@@ -1,4 +1,6 @@
 FROM ghcr.io/qlicks/magento-php-$php-version:latest
 
-echo $AUTH_JSON > auth.json
+if [[ -z "${AUTH_JSON}" ]]; then
+      echo "$AUTH_JSON" > auth.json
+fi
 dep $*
