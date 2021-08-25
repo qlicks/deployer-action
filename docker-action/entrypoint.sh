@@ -3,6 +3,6 @@
 pwd
 ls -la 
 
-set -e
-
-dep $*
+#set -e
+#
+#dep $*
