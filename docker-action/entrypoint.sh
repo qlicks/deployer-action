@@ -2,7 +2,7 @@
 
 printenv
 pwd
-ls -la /app-home
+ls -la / 
 
 set -e
 
