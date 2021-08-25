@@ -23,9 +23,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'ghcr.io/qlicks/magento-php-${{ inputs.php-version }}:latest'
-  env:
-    PHP_VERSION: ${{ inputs.task }}
+  image: 'Dockerfile'
   args: 
     - ${{ inputs.php-version }}
     - ${{ inputs.task }}
