@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 PHP_VERSION=$1
-
+ls -la 
 cd /docker-action
 echo "creating docker image with alpine version: $PHP_VERSION"
 
