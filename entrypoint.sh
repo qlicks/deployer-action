@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/bin/sh -l
 
-set -e
+PHP_VERSION=$1
 
-if [[ -z "${AUTH_JSON}" ]]; then
-      echo "$AUTH_JSON" > auth.json
-fi
-dep $* 
+cd /docker-action
+echo "creating docker image with alpine version: $PHP_VERSION"
+
+# here we can make the construction of the image as customizable as we need
+# and if we need parameterizable values it is a matter of sending them as inputs
+docker build -t docker-action --build-arg php-version="$PHP_VERSION" . && docker run docker-action
 
