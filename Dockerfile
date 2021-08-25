@@ -1,4 +1,5 @@
 #FROM "ghcr.io/qlicks/magento-php-${PHP-VERSION}"
+ARG PHP-VERSION
 FROM "php:${PHP-VERSION}-fpm"
 
 
