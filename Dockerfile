@@ -1,4 +1,4 @@
-FROM "ghcr.io/qlicks/magento-php-${php_version}:latest"
+FROM "ghcr.io/qlicks/magento-php-${PHP-VERSION}:latest"
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY docker-action/deploy.php /app/deploy.php
