@@ -5,10 +5,10 @@ branding:
   color: yellow
   icon: package
 inputs:
-#  php-version:
-#    description: 'Version of php for build project'
-#    required: true
-#    default: 7.3
+  php-version:
+    description: 'Version of php for build project'
+    required: true
+    default: 7.3
 #  overwrite:
 #    description: 'File that will be required to default deploy.php, must contain hosts configuration, my default require deploy.php in root dir'
 #    required: true
