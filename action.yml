@@ -27,6 +27,7 @@ runs:
   env:
     PHP_VERSION: ${{ inputs.task }}
   args: 
+    - ${{ inputs.php-version }}
     - ${{ inputs.task }}
     - ${{ inputs.target }}
     - ${{ inputs.extra-arguments }}
