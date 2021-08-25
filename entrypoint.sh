@@ -2,6 +2,8 @@
 
 PHP_VERSION=$1
 
+echo $GITHUB_WORKSPACE
+
 cd /docker-action
 
 echo "creating docker image with alpine version: $PHP_VERSION"
