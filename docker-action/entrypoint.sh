@@ -1,5 +1,6 @@
 #!/bin/sh -l
 
+printenv
 pwd
 ls -la 
 
