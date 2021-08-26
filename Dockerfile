@@ -1,6 +1,5 @@
 # Container image that runs your code
-#FROM alpine:latest
-FROM ghcr.io/qlicks/magento-deployer:${INPUT_PHP-VERSION}
+FROM alpine:latest
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY docker-action /docker-action
