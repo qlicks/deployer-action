@@ -2,7 +2,7 @@
 
 printenv
 pwd
-ls -la / 
+ls -la
 
 set -e
 
