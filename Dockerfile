@@ -1,6 +1,7 @@
 # Container image that runs your code
 FROM alpine:latest
 
+RUN echo $PHP_VERSION
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY docker-action /docker-action
 COPY entrypoint.sh /entrypoint.sh
