@@ -1,4 +1,9 @@
-FROM ghcr.io/qlicks/magento-php-$php-version:latest
+FROM ghcr.io/qlicks/magento-php-7.4:latest
 
+COPY deploy.php /deploy.php
 
-dep $*
+COPY entrypoint.sh /entrypoint.sh
+
+RUN ["chmod", "+x", "/entrypoint.sh"]
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -3,7 +3,6 @@
 namespace Deployer;
 
 require 'recipe/common.php';
-require '$_ENV["overwrite"]';
 use Deployer\Exception\Exception;
 use Deployer\Exception\RuntimeException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -28,14 +27,6 @@ set('database_upgrade_needed', function () {
     return false;
 });
 
-task('database:upgrade', function () {
-    if (get('database_upgrade_needed')) {
-        run('{{bin/php}} {{release_path}}/{{magento_bin}} setup:db-schema:upgrade --no-interaction');
-        run('{{bin/php}} {{release_path}}/{{magento_bin}} setup:db-data:upgrade --no-interaction');
-    } else {
-        writeln('Skipped -> All Modules are up to date');
-    }
-});
 
 task('maintenance:set:if-needed', function () {
     get('database_upgrade_needed') || get('config_import_needed') ?
@@ -60,9 +51,6 @@ set('config_import_needed', function () {
     }
     return false;
 });
-
-set('magento_bin', 'bin/magento');
-
 
 
 desc('Creating Override symlinks for override shared files and dirs');
@@ -129,6 +117,7 @@ task('deploy:override_shared', function () {
         run("{{bin/symlink}} $sharedPath/$file {{release_path}}/$file");
     }
 });
+
 task('maintenance:set', function () {
     # IMPORTANT: do not use {{current_path}} for the "-f" check.
     # {{current_path}} returns error if symlink does not exists
@@ -149,7 +138,16 @@ task('maintenance:unset', function () {
         writeln('Skipped -> maintenance is already unset');
 });
 
-task('artifact:package', 'mkdir {{artifact_path}} && tar --exclude=\'artifacts*\' --exclude=\'deploy.php\' -czf {{artifact_path}}/{{artifact_file}} .');
+task('artifact:package', fuction () {
+    $override = get('artifact_excludes_file');
+    $exclude = '';
+    foreach ($override as $a) {
+         $exclude .= "--exclude=\'$a\' ";
+    }
+    set('exclude', $exclude)
+    run('mkdir {{artifact_path}} && tar {{exclude}} -czf {{artifact_path}}/{{artifact_file}} .');
+
+});
 
 task('artifact:upload', function () {
     upload(get('artifact_path'), '{{release_path}}');
@@ -160,8 +158,8 @@ task ('composer:lock:get', function () {
 });
 
 task('artifact:extract', '
-	tar -xzpf {{release_path}}/{{artifact_path}}/{{artifact_file}} -C {{release_path}};
-	rm -rf {{release_path}}/{{artifact_path}}
+    tar -xzpf {{release_path}}/{{artifact_path}}/{{artifact_file}} -C {{release_path}};
+    rm -rf {{release_path}}/{{artifact_path}}
 ');
 
 
@@ -226,16 +224,12 @@ task('deploy-artifact', [
     'deploy:release',
     'artifact:upload',
     'artifact:extract',
-    //'deploy:clear_paths',
     'deploy:shared',
     'maintenance:set:if-needed',
-    'database:upgrade',
     'magento:setup:upgrade',
     'files:compile',
-    //'files:optimize-autoloader',
     'files:static_assets',
     'cache:clear:if-maintenance',
-    //'deploy:override_shared',
     'deploy:symlink',
     'maintenance:unset',
     'cache:clear',
@@ -287,13 +281,15 @@ set('cache_enabled_caches', 'all');
 set('artifact_path', 'artifacts');
 set('artifact_file', 'artifact.tar.gz');
 set('default_timeout', 1200);
-set('artifact_excludes_file',['deploy.php','artifacts']);
+set('artifact_excludes_file',['deploy.php','artifacts', 'auth.json']);
 
 
 set('shared_files', [
     '{{magento_dir}}/app/etc/env.php',
     '{{magento_dir}}/app/etc/config.php',
+#    '{{magento_dir}}/sitemap.xml',
 ]);
+
 set('shared_dirs', [
     '{{magento_dir}}/pub/media',
     '{{magento_dir}}/var/log',
@@ -301,4 +297,11 @@ set('shared_dirs', [
     '{{magento_dir}}/var/export',
     '{{magento_dir}}/var/session'
 ]);
+
+
+set('magento_bin', 'bin/magento');
+//set ('bin/composer','/usr/local/bin/composer2');
+//set('bin/php', '~/.bin/php');
+inventory('hosts.yml');
+
 
