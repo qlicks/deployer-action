@@ -18,7 +18,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.3.1'
+  image: 'docker://ghcr.io/qlicks/magento-deployer:latest'
   args: 
     - ${{ inputs.task }}
     - ${{ inputs.target }}
