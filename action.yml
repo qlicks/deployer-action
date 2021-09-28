@@ -5,7 +5,7 @@ branding:
   color: yellow
   icon: package
 inputs:
-  php-version:
+  php_version:
     description: 'Versions of php will be used'
     required: true
   task: 
@@ -13,13 +13,14 @@ inputs:
     required: true
   target:
     description: 'Where run deploy, used only if deploy to server'
-  extra-arguments:
+  extra_arguments:
     description: 'Extra arguments for deployer, like verbose mode'
 
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/qlicks/magento-deployer:latest'
   args: 
+    - ${{ inputs.php_version }}
     - ${{ inputs.task }}
     - ${{ inputs.target }}
-    - ${{ inputs.extra-arguments }}
+    - ${{ inputs.extra_arguments }}
