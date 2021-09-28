@@ -5,14 +5,6 @@ branding:
   color: yellow
   icon: package
 inputs:
-  php-version:
-    description: 'Version of php for build project'
-    required: true
-    default: 7.3
-#  overwrite:
-#    description: 'File that will be required to default deploy.php, must contain hosts configuration, my default require deploy.php in root dir'
-#    required: true
-#    default: deploy.php
   task: 
     description: 'Task to run, example build, deploy, docker'
     required: true
@@ -23,7 +15,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.3.1'
   args: 
     - ${{ inputs.task }}
     - ${{ inputs.target }}
