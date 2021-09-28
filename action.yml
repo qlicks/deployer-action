@@ -7,7 +7,6 @@ branding:
 inputs:
   php_version:
     description: 'Versions of php will be used'
-    required: true
     default: '7.4'
   task: 
     description: 'Task to run, example build, deploy, docker'
