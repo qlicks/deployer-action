@@ -16,7 +16,7 @@ inputs:
   extra_arguments:
     description: 'Extra arguments for deployer, like verbose mode'
   slack_channel:
-    description: Slack channel id to inform
+    description: 'Slack channel id to inform (optional)'
 
 runs:
   using: 'composite'

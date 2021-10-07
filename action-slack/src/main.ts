@@ -34,8 +34,12 @@ async function run(): Promise<void> {
     core.debug(`job_name: ${job_name}`);
     core.debug(`github_base_url: ${github_base_url}`);
 
-    if ( process.env.SLACK_WEBHOOK_URL === 'undefined' || webhookUrl === null || webhookUrl === '' ) {
-        process.exit(0);
+    if (
+      process.env.SLACK_WEBHOOK_URL === 'undefined' ||
+      process.env.SLACK_WEBHOOK_URL === null ||
+      process.env.SLACK_WEBHOOK_URL === ''
+    ) {
+      process.exit(0);
     }
 
     const client = new Client(
