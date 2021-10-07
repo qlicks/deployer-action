@@ -15,13 +15,26 @@ inputs:
     description: 'Where run deploy, used only if deploy to server'
   extra_arguments:
     description: 'Extra arguments for deployer, like verbose mode'
+  slack_channel:
+    description: Slack channel id to inform
 
 runs:
   using: 'composite'
   steps:
-     - uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
+     - id: Get enviroment variables
+       uses: FranzDiebold/github-env-vars-action@v2
+     - id: Notification
+       uses: 8398a7/action-slack@v3
+       with:
+          text: 'Start build and deploy'
+          status: ${{ job.status }}
+          channel: ${{ inputs.slack_channel }}
+          fields: repo,message,commit,author,ref # selectable (default: repo,message)
+      
+     - id: Deloyer action
+       uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
        env: 
           INPUT_PHP_VERSION: ${{ inputs.php_version }}
           INPUT_TASK: ${{ inputs.task }}
           INPUT_TARGET: ${{ inputs.target }}
-          INPUT:EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}
+          INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}
