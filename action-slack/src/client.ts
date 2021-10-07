@@ -61,6 +61,7 @@ export class Client {
     this.octokit = getOctokit(token);
 
     if (webhookUrl === undefined || webhookUrl === null || webhookUrl === '') {
+      return process.exit(0);
       throw new Error('Specify secrets.SLACK_WEBHOOK_URL');
     }
 
