@@ -24,7 +24,7 @@ runs:
      - id: get_enviroment_variables
        uses: FranzDiebold/github-env-vars-action@v2
      - id: notification
-       uses: qlicks/deployer-action/action-slack
+       uses: qlicks/deployer-action/action-slack@master
        with:
           text: 'Start build and deploy'
           status: ${{ job.status }}
