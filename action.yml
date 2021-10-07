@@ -17,10 +17,11 @@ inputs:
     description: 'Extra arguments for deployer, like verbose mode'
 
 runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
-  args: 
-    - ${{ inputs.php_version }}
-    - ${{ inputs.task }}
-    - ${{ inputs.target }}
-    - ${{ inputs.extra_arguments }}
+  using: 'composite'
+  steps:
+     uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
+     args: 
+        - ${{ inputs.php_version }}
+        - ${{ inputs.task }}
+        - ${{ inputs.target }}
+        - ${{ inputs.extra_arguments }}
