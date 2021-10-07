@@ -4,7 +4,7 @@ author: 8398a7
 inputs:
   status:
     description: Specify success or failure or cancelled or custom.
-    required: true
+    required: false
   fields:
     description: |
       You can choose the items you want to add to the fields at the time of notification.
