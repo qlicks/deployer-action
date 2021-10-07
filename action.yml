@@ -21,9 +21,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - id: Get enviroment variables
+     - id: get_enviroment_variables
        uses: FranzDiebold/github-env-vars-action@v2
-     - id: Notification
+     - id: notification
        uses: 8398a7/action-slack@v3
        with:
           text: 'Start build and deploy'
@@ -31,7 +31,7 @@ runs:
           channel: ${{ inputs.slack_channel }}
           fields: repo,message,commit,author,ref # selectable (default: repo,message)
       
-     - id: Deloyer action
+     - id: deloyer_action
        uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
        env: 
           INPUT_PHP_VERSION: ${{ inputs.php_version }}
