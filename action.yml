@@ -19,7 +19,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
+     - uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
 #     args: 
 #        - ${{ inputs.php_version }}
 #        - ${{ inputs.task }}
