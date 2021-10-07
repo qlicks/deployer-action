@@ -3,7 +3,7 @@ import { Client, Success, Failure, Cancelled, Custom } from './client';
 
 async function run(): Promise<void> {
   try {
-    const status = core.getInput('status', { required: true }).toLowerCase();
+    const status = core.getInput('status', { required: false }).toLowerCase();
     const mention = core.getInput('mention');
     const author_name = core.getInput('author_name');
     const if_mention = core.getInput('if_mention').toLowerCase();
@@ -39,6 +39,7 @@ async function run(): Promise<void> {
       process.env.SLACK_WEBHOOK_URL === null ||
       process.env.SLACK_WEBHOOK_URL === ''
     ) {
+      return console.log('No Specify secrets.SLACK_WEBHOOK_URL');
       return process.exit(0);
     }
 
