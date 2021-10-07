@@ -18,7 +18,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/qlicks/magento-deployer:latest'
+  image: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
   args: 
     - ${{ inputs.php_version }}
     - ${{ inputs.task }}
