@@ -39,7 +39,7 @@ async function run(): Promise<void> {
       process.env.SLACK_WEBHOOK_URL === null ||
       process.env.SLACK_WEBHOOK_URL === ''
     ) {
-      process.exit(0);
+      return process.exit(0);
     }
 
     const client = new Client(
