@@ -59,8 +59,8 @@ runs:
      - id: stop_notification
        uses: qlicks/deployer-action/action-slack@master
        with:
-          text: 'Task ${{ inputs.task }} on ${{ inputs.target }} status'
           status: ${{ job.status }}
           channel: ${{ inputs.slack_channel }}
           fields: repo,message,commit,author,ref # selectable (default: repo,message)
+       if: always()
           
