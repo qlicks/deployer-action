@@ -30,7 +30,15 @@ runs:
           status: ${{ job.status }}
           channel: ${{ inputs.slack_channel }}
           fields: repo,message,commit,author,ref # selectable (default: repo,message)
-      
+     - id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+     - uses: actions/cache@v2
+       with:
+           path: ${{ steps.composer-cache.outputs.dir }}
+           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+           restore-keys: |
+                 ${{ runner.os }}-composer-
      - id: deloyer_action
        uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.2'
        env: 
