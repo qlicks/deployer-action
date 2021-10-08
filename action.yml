@@ -48,7 +48,7 @@ runs:
            restore-keys: |
                  ${{ runner.os }}-composer-
      - id: deloyer_action
-       uses: 'docker://ghcr.io/qlicks/magento-deployer:0.0.4'
+       uses: 'docker://ghcr.io/qlicks/magento-deployer:master'
        env: 
           INPUT_PHP_VERSION: ${{ inputs.php_version }}
           INPUT_TASK: ${{ inputs.task }}
