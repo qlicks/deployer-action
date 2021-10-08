@@ -21,11 +21,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - id: Checkout
-       uses: actions/checkout@v2
-       with:
-         fetch-depth: 0
-
      - id: get_enviroment_variables
        uses: FranzDiebold/github-env-vars-action@v2
 
