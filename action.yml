@@ -56,11 +56,4 @@ runs:
           INPUT_TARGET: ${{ inputs.target }}
           INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}
           
-     - id: stop_notification
-       uses: qlicks/deployer-action/action-slack@master
-       with:
-          status: ${{ job.status }}
-          channel: ${{ inputs.slack_channel }}
-          fields: repo,message,commit,author,ref # selectable (default: repo,message)
-       if: always()
           
