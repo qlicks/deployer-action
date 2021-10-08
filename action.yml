@@ -40,6 +40,7 @@ runs:
      - id: composer-cache
        run: |
             echo "::set-output name=dir::$(composer config cache-files-dir)"
+       shell: bash
      - uses: actions/cache@v2
        with:
            path: ${{ steps.composer-cache.outputs.dir }}
