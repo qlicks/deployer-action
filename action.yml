@@ -35,7 +35,7 @@ runs:
           text: 'Task ${{ inputs.task }} on ${{ inputs.target }} start'
           status: ${{ job.status }}
           channel: ${{ inputs.slack_channel }}
-          fields: repo,message,commit,author,ref # selectable (default: repo,message)
+          fields: repo,message,commit,author,eventName,ref # selectable (default: repo,message)
 
      - id: composer-cache
        run: |
