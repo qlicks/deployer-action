@@ -43,7 +43,7 @@
           with:
             fetch-depth: 0
         - name: Deployer Get composer.lock from server
-          uses: qlicks/deployer-action@master
+          uses: qlicks/deployer-action@v1
           env: 
               SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           with:
@@ -52,7 +52,7 @@
               extra_arguments: -vvvv
                     
         - name: Build
-          uses: qlicks/deployer-action@master
+          uses: qlicks/deployer-action@v1
           env: 
               COMPOSER_AUTH: ${{ secrets.AUTH }}
           with:
@@ -101,7 +101,7 @@
           with:
             fetch-depth: 0
         - name: Build
-          uses: qlicks/deployer-action@master
+          uses: qlicks/deployer-action@v1
           with:
               task: build
               target: build
@@ -130,7 +130,7 @@
               path: artifacts/
               
         - name: Deploy
-          uses: qlicks/deployer-action@master
+          uses: qlicks/deployer-action@v1
           env:
               SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           with:
