@@ -116,6 +116,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
+          channel: '#deploy-alerts'
           fields: repo,message,commit,author,action,eventName,ref 
         if: failure() 
             
@@ -142,6 +143,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
+          channel: '#deploy-alerts'
           fields: repo,message,commit,author,action,eventName,ref 
         if: always() 
   ```
