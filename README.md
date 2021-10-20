@@ -79,70 +79,71 @@
   #### Build and deploy magento to server example configuration:
 
   ```yaml
-  name: CD-TEST
-  
-  on:
-    workflow_dispatch:
-      inputs:
-        stage:
-           description: 'Deploy to production or STAGE'
-           required: true
-           default: 'STAGE'
-  
-  jobs:
-    build:
-      runs-on: self-hosted
-      env:
-        COMPOSER_AUTH: ${{ secrets.AUTH }}
-        SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK }}
-      steps:
-        - id: Checkout
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - name: Build
-          uses: qlicks/deployer-action@master
-          with:
-              task: build
-              target: build
-  
-        - uses: actions/upload-artifact@v2
-          with:
-              name: artifacts
-              path: artifacts/**
-        - uses: 8398a7/action-slack@v3
-          with:
-            status: ${{ job.status }}
-            fields: repo,message,commit,author,action,eventName,ref 
-          if: success() 
-              
-    deploy:
-      runs-on: self-hosted
-      needs: build
-      steps:
-        - id: Checkout
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - uses: actions/download-artifact@v2
-          with:
-              name: artifacts
-              path: artifacts/
-              
-        - name: Deploy
-          uses: qlicks/deployer-action@master
-          env:
-              SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          with:
-              task: deploy-artifact
-              target: ${{ github.event.inputs.stage }}
-              
-        - uses: 8398a7/action-slack@v3
-          with:
-            status: ${{ job.status }}
-            fields: repo,message,commit,author,action,eventName,ref 
-          if: always() 
-  
+name: CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+         description: 'Deploy to production or STAGE'
+         required: true
+         default: 'STAGE'
+
+env:
+  COMPOSER_AUTH: ${{ secrets.AUTH }}
+  SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - id: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        uses: qlicks/deployer-action@v1
+        with:
+            task: build
+            target: build
+            slack_channel: qlicks-deploy-alerts
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: artifacts
+            path: artifacts/**
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref 
+        if: failure() 
+            
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - id: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v2
+        with:
+            name: artifacts
+            path: artifacts/
+            
+      - name: Deploy
+        uses: qlicks/deployer-action@v1
+        with:
+            task: deploy-artifact
+            target: ${{ github.event.inputs.stage }}
+            slack_channel: qlicks-deploy-alerts
+            
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref 
+        if: always() 
   ```
 
   
