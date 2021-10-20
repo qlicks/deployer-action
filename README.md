@@ -78,7 +78,7 @@
 
   #### Build and deploy magento to server example configuration:
 
-  ```yaml
+```yaml
 name: CD
 
 on:
