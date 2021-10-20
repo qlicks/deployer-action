@@ -107,7 +107,7 @@ jobs:
         with:
             task: build
             target: build
-            slack_channel: qlicks-deploy-alerts
+            slack_channel: deploy-alerts
 
       - uses: actions/upload-artifact@v2
         with:
@@ -137,7 +137,7 @@ jobs:
         with:
             task: deploy-artifact
             target: ${{ github.event.inputs.stage }}
-            slack_channel: qlicks-deploy-alerts
+            slack_channel: deploy-alerts
             
       - uses: 8398a7/action-slack@v3
         with:
