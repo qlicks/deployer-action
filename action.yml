@@ -24,13 +24,13 @@ runs:
      - id: get_enviroment_variables
        uses: FranzDiebold/github-env-vars-action@v2
 
-     - id: start_notification
-       uses: qlicks/deployer-action/action-slack@master
-       with:
-          text: 'Task ${{ inputs.task }} on ${{ inputs.target }} start'
-          status: ${{ job.status }}
-          channel: ${{ inputs.slack_channel }}
-          fields: repo,message,commit,author,eventName,ref # selectable (default: repo,message)
+#     - id: start_notification
+#       uses: qlicks/deployer-action/action-slack@master
+#       with:
+#          text: 'Task ${{ inputs.task }} on ${{ inputs.target }} start'
+#          status: ${{ job.status }}
+#          channel: ${{ inputs.slack_channel }}
+#          fields: repo,message,commit,author,eventName,ref # selectable (default: repo,message)
 
      - id: composer-cache
        run: |
@@ -50,5 +50,6 @@ runs:
           INPUT_TASK: ${{ inputs.task }}
           INPUT_TARGET: ${{ inputs.target }}
           INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}
+          INPUT_SLACK_CHANNEL: ${{ inputs.slack_channel }}
           
           
