@@ -214,7 +214,3 @@ jobs:
       deploy:vendors:
         script: 'cd {{release_path}} && echo {{bin/composer}} {{composer_options}} 2>&1'
   ```
-
-   
-
-   
