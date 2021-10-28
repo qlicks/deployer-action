@@ -220,7 +220,9 @@ jobs:
         script: 'cd {{release_path}} && echo {{bin/composer}} {{composer_options}} 2>&1'
   ```
 ```bin/composer``` - Path to composer binary used when build project. 
+
 *Default:* /usr/local/bin/composer (Composer version 1)
+
 Optional: /usr/local/bin/composer2 (Composer version 2)
 
 ```bin/php``` - Path to php interpretator on server 
