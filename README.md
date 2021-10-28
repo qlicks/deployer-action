@@ -163,6 +163,9 @@ jobs:
     artifact_path: artifacts
     artifact_file: artifact.tar.gz
     magento_dir: .
+    dos2unix: true
+    keep_releases: 5
+    keep_db_backups: 1
     static_deploy_options: --jobs=4 -f
     languages: en_US nl_NL
     cache_enabled_caches: all
