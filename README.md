@@ -219,3 +219,31 @@ jobs:
       deploy:vendors:
         script: 'cd {{release_path}} && echo {{bin/composer}} {{composer_options}} 2>&1'
   ```
+```bin/composer``` - Path to composer binary used when build project. 
+*Default:* /usr/local/bin/composer (Composer version 1)
+Optional: /usr/local/bin/composer2 (Composer version 2)
+
+```bin/php``` - Path to php interpretator on server 
+
+*Default:* System default path 
+
+Optional: On hipex need set to ~/./bin/php
+
+```dos2unix``` - enable convert all files for dos to unix on build step 
+
+```keep_releases``` - How mush releases keep in enviroment
+
+*Default:* 5
+
+```keep_db_backups``` - How many backups store on server
+
+*Default:* 1
+
+0 - Disable feature
+
+```static_deploy_options``` - Arguments for magento static build
+
+*Default:* --jobs=4 -f
+
+```labels``` - Enviroment labels can be any word
+
