@@ -12,11 +12,11 @@
 
 - Integrated composer cache
 
-- Create fresh stage for project 
-
 - Deploy production or stage
 
 - Notifaction to slack with step status
+
+- Auto backups databases
 
   
   
@@ -158,8 +158,8 @@ jobs:
   import: recipe/common.php
   
   config:
-    bin/composer: /usr/local/bin/composer2
-    bin/php: /usr/local/bin/php74
+    bin/composer: /usr/local/bin/composer2 
+    bin/php: /usr/local/bin/php74 
     artifact_path: artifacts
     artifact_file: artifact.tar.gz
     magento_dir: .
@@ -186,8 +186,10 @@ jobs:
   
   hosts:
     production:
-        labels: 
-           stage: master
+      labels: 
+         stage: 
+           - master
+           - production
         hostname: example.com
         remote_user: username
         deploy_path: /var/www/
