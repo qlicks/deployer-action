@@ -24,7 +24,7 @@ runs:
      - id: get_enviroment_variables
        uses: FranzDiebold/github-env-vars-action@v2
      - id: deloyer_action
-       uses: 'docker://ghcr.io/qlicks/magento-deployer:0.4.5'
+       uses: 'docker://ghcr.io/qlicks/magento-deployer:0.4.6'
        env: 
           INPUT_PHP_VERSION: ${{ inputs.php_version }}
           INPUT_TASK: ${{ inputs.task }}
